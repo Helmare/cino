@@ -19,5 +19,9 @@
   "bugs": {
     "url": "https://github.com/hazdryx/ciao/issues"
   },
-  "homepage": "https://github.com/hazdryx/ciao#readme"
+  "homepage": "https://github.com/hazdryx/ciao#readme",
+  "dependencies": {
+    "commander": "^8.1.0",
+    "minimist": "^1.2.5"
+  }
 }
