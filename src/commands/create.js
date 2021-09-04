@@ -1,9 +1,12 @@
 const { program, Command } = require('commander');
+const chalk = require('chalk');
+const Workspace = require('../core/workspace');
 
 module.exports = new Command('create')
   .aliases(['cr'])
   .description('creates a workspace')
-  .action(() => {
+  .action(function() {
     const ws = program.opts().ws;
-    console.log(`Creating a ${ws} workspace...`);
+    new Workspace(ws).save();
+    console.log(`Successfully created the ${chalk.cyanBright(ws)} workspace.`);
   });

@@ -21,6 +21,8 @@
   },
   "homepage": "https://github.com/hazdryx/ciao#readme",
   "dependencies": {
-    "commander": "^8.1.0"
+    "chalk": "^4.1.2",
+    "commander": "^8.1.0",
+    "jsonfile": "^6.1.0"
   }
 }
