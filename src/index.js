@@ -8,7 +8,7 @@ program
   .version('0.1.0');
 
 // Commands
-program.addCommand(require('./commands/create'));
+require('./commands/create');
 
 // Runs
 program.parse(process.argv);

@@ -34,5 +34,13 @@ class Workspace {
     }
     jsonf.writeFileSync(path.join(WORKSPACE_DIR, `${this.name.replace(/\s/g, '_')}.json`), this);
   }
+
+  /**
+   * Checks whether or not the workspace exists.
+   * @param {string} name 
+   */
+  static exists(name) {
+    return fs.existsSync(path.join(WORKSPACE_DIR, `${name.replace(/\s/g, '_')}.json`));
+  }
 }
 module.exports = Workspace;

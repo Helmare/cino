@@ -2,11 +2,16 @@ const { program, Command } = require('commander');
 const chalk = require('chalk');
 const Workspace = require('../core/workspace');
 
-module.exports = new Command('create')
-  .aliases(['cr'])
+program.addCommand(new Command('create')
+  .aliases(['cr', 'make', 'mk'])
   .description('creates a workspace')
   .action(function() {
     const ws = program.opts().ws;
-    new Workspace(ws).save();
-    console.log(`Successfully created the ${chalk.cyanBright(ws)} workspace.`);
-  });
+    if (Workspace.exists(ws)) {
+      console.log(chalk.yellowBright('Workspace already exists.'));
+    }
+    else {
+      new Workspace(ws).save();
+      console.log(`Successfully created the ${chalk.cyanBright(ws)} workspace.`);
+    }
+  }));
