@@ -9,6 +9,7 @@ program
 
 // Commands
 require('./commands/create');
+require('./commands/remove');
 
 // Runs
 program.parse(process.argv);

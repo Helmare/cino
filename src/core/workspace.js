@@ -32,15 +32,30 @@ class Workspace {
     if (!fs.existsSync(WORKSPACE_DIR)) {
       fs.mkdirSync(WORKSPACE_DIR);
     }
-    jsonf.writeFileSync(path.join(WORKSPACE_DIR, `${this.name.replace(/\s/g, '_')}.json`), this);
+    jsonf.writeFileSync(Workspace.path(this.name), this);
   }
 
   /**
+   * @param {string} name 
+   * @returns the path of the workspace.
+   */
+  static path(name) {
+    return path.join(WORKSPACE_DIR, `${name.replace(/\s/g, '_')}.json`);
+  }
+  /**
    * Checks whether or not the workspace exists.
    * @param {string} name 
+   * @returns {boolean}
    */
   static exists(name) {
-    return fs.existsSync(path.join(WORKSPACE_DIR, `${name.replace(/\s/g, '_')}.json`));
+    return fs.existsSync(Workspace.path(name));
+  }
+  /**
+   * Removes the workspace.
+   * @param {string} name 
+   */
+  static remove(name) {
+    fs.unlinkSync(Workspace.path(name));
   }
 }
 module.exports = Workspace;
