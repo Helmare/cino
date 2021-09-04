@@ -21,7 +21,6 @@
   },
   "homepage": "https://github.com/hazdryx/ciao#readme",
   "dependencies": {
-    "commander": "^8.1.0",
-    "minimist": "^1.2.5"
+    "commander": "^8.1.0"
   }
 }
