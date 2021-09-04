@@ -7,8 +7,8 @@ program
   .requiredOption('-w, --ws <name>', 'the workspace to be used (required)')
   .version('0.1.0');
 
-// Parse
-program.parse(process.argv);
+// Commands
+program.addCommand(require('./commands/create'));
 
-// Run
-console.log(program.opts().ws);
+// Runs
+program.parse(process.argv);
