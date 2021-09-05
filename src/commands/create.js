@@ -1,6 +1,6 @@
 const { program, Command } = require('commander');
 const chalk = require('chalk');
-const Workspace = require('../core/workspace');
+const { Workspace } = require('../core/workspace');
 
 program.addCommand(new Command('create')
   .aliases(['cr', 'make', 'mk'])

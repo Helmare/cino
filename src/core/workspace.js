@@ -9,19 +9,27 @@ class Workspace {
    * @param {object|string} data 
    */
   constructor(data) {
+    /**
+     * @type {string}
+     */
+    this.name = '';
+    /**
+     * @type {Date[]}
+     */
+    this.clocks = [];
+
     if (typeof(data) === 'object') {
       if (data.name) this.name = data.name;
-      if (data.clocks) this.clocks = data.clocks;
+      if (data.clocks) {
+        data.clocks.forEach(e => {
+          this.clocks.push(new Date(e));
+        });
+      }
+
+      console.log(this.clocks);
     }
     else if (typeof(data) === 'string') {
-      /**
-       * @type {string}
-       */
       this.name = data;
-      /**
-       * @type {object[]}
-       */
-      this.clocks = [];
     }
   }
 
@@ -57,5 +65,27 @@ class Workspace {
   static remove(name) {
     fs.unlinkSync(Workspace.path(name));
   }
+  /**
+   * Loads a workspace.
+   * @param {string} name 
+   * @return {Workspace}
+   */
+  static load(name) {
+    if (Workspace.exists(name)) {
+      return new Workspace(jsonf.readFile(Workspace.path(name)));
+    }
+  }
+  /**
+   * Loads a workspace or creates a new one if it doesn't exist.
+   * @param {string} name 
+   */
+  static loadOrNew(name) {
+    const ws = Workspace.load(name);
+    if (ws) return ws;
+    else return new Workspace(name);
+  }
 }
-module.exports = Workspace;
+module.exports = {
+  WORKSPACE_DIR,
+  Workspace
+};
