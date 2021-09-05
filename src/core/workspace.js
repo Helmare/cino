@@ -3,6 +3,7 @@ const path = require('path');
 const jsonf = require('jsonfile');
 
 const WORKSPACE_DIR = path.join(require('os').homedir(), '.ciao');
+const MILLIS_TO_HOURS = 1 / 3600000;
 class Workspace {
   /**
    * 
@@ -24,7 +25,7 @@ class Workspace {
         data.clocks.forEach(e => {
           this.clocks.push(new Date(e));
         });
-        this.clocks = this.clocks.sort((a, b) => a.getTime() - b.getTime());
+        this.clocks.sort((a, b) => a.getTime() - b.getTime());
       }
     }
     else if (typeof(data) === 'string') {
@@ -57,7 +58,7 @@ class Workspace {
       total += Date.now() - clockIn;
     }
 
-    return total;
+    return total * MILLIS_TO_HOURS;
   }
 
   /**
@@ -66,7 +67,7 @@ class Workspace {
    */
   get cycleTime() {
     if (this.clocks.length % 2 == 1) {
-      return Date.now() - this.clocks[this.clocks.length - 1];
+      return (Date.now() - this.clocks[this.clocks.length - 1]) * MILLIS_TO_HOURS;
     }
   }
 
@@ -129,6 +130,7 @@ class Workspace {
   }
 }
 module.exports = {
+  MILLIS_TO_HOURS,
   WORKSPACE_DIR,
   Workspace
 };
