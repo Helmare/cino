@@ -24,15 +24,58 @@ class Workspace {
         data.clocks.forEach(e => {
           this.clocks.push(new Date(e));
         });
+        this.clocks = this.clocks.sort((a, b) => a.getTime() - b.getTime());
       }
-
-      console.log(this.clocks);
     }
     else if (typeof(data) === 'string') {
       this.name = data;
     }
   }
 
+  /**
+   * Gets the total hours of all clock cycles.
+   * @returns {number}
+   */
+  get time() {
+    let total = 0;
+    let clockIn = undefined;
+
+    // Loop through each clock and alternate between
+    // clock in and clock out.
+    this.clocks.forEach(clk => {
+      if (clockIn) {
+        total += clk.getTime() - clockIn;
+        clockIn = undefined;
+      }
+      else {
+        clockIn = clk.getTime();
+      }
+    });
+
+    // Check if last clock was a clock in.
+    if (clockIn) {
+      total += Date.now() - clockIn;
+    }
+
+    return total;
+  }
+
+  /**
+   * Gets the hours of the current clock cycle.
+   * @returns {number|undefined}
+   */
+  get cycleTime() {
+    if (this.clocks.length % 2 == 1) {
+      return Date.now() - this.clocks[this.clocks.length - 1];
+    }
+  }
+
+  /**
+   * Performs a clock on this workspace.
+   */
+  clock() {
+    this.clocks.push(new Date());
+  }
   /**
    * Saves the workspace to a file as JSON.
    */
@@ -72,7 +115,7 @@ class Workspace {
    */
   static load(name) {
     if (Workspace.exists(name)) {
-      return new Workspace(jsonf.readFile(Workspace.path(name)));
+      return new Workspace(jsonf.readFileSync(Workspace.path(name)));
     }
   }
   /**

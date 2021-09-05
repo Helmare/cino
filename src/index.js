@@ -14,6 +14,8 @@ program.command('dir').action(() => {
 
 // Commands
 require('./commands/create');
+require('./commands/clock');
+require('./commands/view');
 require('./commands/remove');
 
 // Runs
