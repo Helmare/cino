@@ -1,4 +1,4 @@
-# Clock In And Out
+# Clock In N' Out
 ciao is a simple cli for tracking time spent in workspaces.
 
 ## Commands
