@@ -28,12 +28,16 @@ program.addCommand(new Command('view')
         cycles.push(renderCycle(clkin));
       }
 
-      console.log(`name: ${chalk.greenBright(ws.name)}`);
-      console.log(`time: ${chalk.cyanBright(ws.time.toFixed(2))} hours`);
-      console.log('--------------------------------------------');
+      console.log('\n---------------------------------------');
+      console.log(`| ${chalk.bold('name'.padStart(11))} | ${chalk.bold(ws.name.padEnd(21))} |`);
+      console.log(`| ${chalk.bold('time'.padStart(11))} | ${chalk.cyanBright(`${ws.time.toFixed(2)} hours`.padEnd(21))} |`);
+      console.log('| ----------------------------------- |');
+      console.log(`|      ${chalk.bold('in')}     |     ${chalk.bold('out')}     |  ${chalk.bold('hours')}  |`);
+      console.log('| ----------- | ----------- | ------- |');
       cycles.reverse().forEach(cyc => {
         console.log(cyc);
       });
+      console.log('---------------------------------------\n');
     }
     else {
       console.log(chalk.yellowBright('Workspace does not exist.'));
@@ -46,13 +50,13 @@ program.addCommand(new Command('view')
  * @returns {string}
  */
 function renderCycle(clkin, clkout) {
-  let render = `${chalk.greenBright(format('MM/dd hh:mm', clkin))} - `;
+  let render = `${chalk.greenBright(format('MM/dd hh:mm', clkin))} | `;
   if (clkout) {
     render += `${chalk.greenBright(format('MM/dd hh:mm', clkout))}`;
   }
   else {
-    render += '    ....   ';
+    render += '     -     ';
   }
   const cycleTime = MILLIS_TO_HOURS * (clkout ? clkout.getTime() - clkin.getTime() : Date.now() - clkin.getTime());
-  return `| ${render} | ${chalk.cyanBright(cycleTime.toFixed(2))} hours`;
+  return `| ${render} | ${chalk.cyanBright(cycleTime.toFixed(2).padStart(7))} |`;
 }
