@@ -4,7 +4,7 @@
   "description": "A CLI timesheet that is differenciated by workspaces.",
   "main": "src/index.js",
   "bin": {
-    "cino": "."
+    "cino": "src/index.js"
   },
   "scripts": {
     "start": "node .",
