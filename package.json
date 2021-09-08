@@ -1,10 +1,10 @@
 {
-  "name": "@hazdryx/ciao",
+  "name": "cino",
   "version": "0.1.0",
-  "description": "A CLI timesheet for keeping track of how much time you put into each workspace.",
+  "description": "A CLI timesheet that is differenciated by workspaces.",
   "main": "src/index.js",
   "bin": {
-    "ciao": "."
+    "cino": "."
   },
   "scripts": {
     "start": "node .",
@@ -12,14 +12,14 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/hazdryx/ciao.git"
+    "url": "git+https://github.com/hazdryx/cino.git"
   },
   "author": "Christopher Bishop",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/hazdryx/ciao/issues"
+    "url": "https://github.com/hazdryx/cino/issues"
   },
-  "homepage": "https://github.com/hazdryx/ciao#readme",
+  "homepage": "https://github.com/hazdryx/cino#readme",
   "dependencies": {
     "chalk": "^4.1.2",
     "commander": "^8.1.0",

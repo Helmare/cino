@@ -4,7 +4,7 @@ const { WORKSPACE_DIR } = require('./core/workspace');
 // Setup
 const { program } = require('commander');
 program
-  .name('ciao')
+  .name('cino')
   .option('-w, --ws <name>', 'the workspace to be used (required)')
   .version('0.1.0')
   .command('dir').action(() => {

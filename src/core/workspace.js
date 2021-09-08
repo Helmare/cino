@@ -2,7 +2,7 @@ const fs = require('fs');
 const path = require('path');
 const jsonf = require('jsonfile');
 
-const WORKSPACE_DIR = path.join(require('os').homedir(), '.ciao');
+const WORKSPACE_DIR = path.join(require('os').homedir(), '.cino');
 const MILLIS_TO_HOURS = 1 / 3600000;
 class Workspace {
   /**
