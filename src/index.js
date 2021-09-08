@@ -5,7 +5,8 @@ const { WORKSPACE_DIR } = require('./core/workspace');
 const { program } = require('commander');
 program
   .name('cino')
-  .option('-w, --ws <name>', 'the workspace to be used (required)')
+  .option('-w, --ws <name>', 'the workspace to be used')
+  .option('-y, --yes', 'skips verification prompt')
   .version('0.1.0')
   .command('dir').action(() => {
     console.log(WORKSPACE_DIR);
