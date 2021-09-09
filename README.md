@@ -1,5 +1,5 @@
-# Clock In N' Out
-ciao is a simple cli for tracking time spent in workspaces.
+# Clock In N' Out (`cino`)
+Cino is a CLI timesheet that's differenciated by workspaces.
 
 ## Commands
 
