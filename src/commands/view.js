@@ -15,7 +15,6 @@ const cmd = buildWorkspaceCommand({
      */
     let clkin = undefined;
     ws.clocks.forEach(clk => {
-      console.log(clk);
       if (clkin) {
         // Add cycle
         cycles.push(renderRow(clkin, clk));

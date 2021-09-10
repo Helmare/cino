@@ -1,6 +1,6 @@
 {
   "name": "cino",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "Clock In N' Out (aka cino) is a cli timesheet application differentiated by workspaces.",
   "keywords": ["cli", "timesheet", "punch card"],
   "main": "src/index.js",
