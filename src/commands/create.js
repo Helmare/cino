@@ -1,9 +1,8 @@
 const { buildWorkspaceCommand } = require('./utils');
-const { program } = require('commander');
 const chalk = require('chalk');
 const { Workspace } = require('../core/workspace');
 
-program.addCommand(buildWorkspaceCommand({
+const cmd = buildWorkspaceCommand({
   name: 'create',
   description: 'creates a workspace',
   aliases: ['cr', 'make', 'mk'],
@@ -20,4 +19,5 @@ program.addCommand(buildWorkspaceCommand({
       console.log(chalk.redBright('Workspace already exists.'));
     }
   }
-}));
+});
+module.exports = cmd;

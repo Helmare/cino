@@ -1,10 +1,9 @@
 const { buildWorkspaceCommand } = require('./utils');
-const { program } = require('commander');
 const chalk = require('chalk');
 const format = require('date-format');
 const { MILLIS_TO_HOURS } = require('../core/workspace');
 
-program.addCommand(buildWorkspaceCommand({
+const cmd = buildWorkspaceCommand({
   name: 'view',
   description: 'views a workspace',
   aliases: ['v'],
@@ -39,8 +38,7 @@ program.addCommand(buildWorkspaceCommand({
     });
     console.log('---------------------------------------\n');
   }
-}));
-
+});
 /**
  * @param {Date} clkin 
  * @param {Date} clkout 
@@ -57,3 +55,5 @@ function renderRow(clkin, clkout) {
   const cycleTime = MILLIS_TO_HOURS * (clkout ? clkout.getTime() - clkin.getTime() : Date.now() - clkin.getTime());
   return `| ${render} | ${chalk.cyanBright(cycleTime.toFixed(2).padStart(7))} |`;
 }
+
+module.exports = cmd;

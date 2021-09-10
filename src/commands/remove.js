@@ -1,9 +1,8 @@
 const { buildWorkspaceCommand } = require('./utils');
-const { program } = require('commander');
 const chalk = require('chalk');
 const { Workspace } = require('../core/workspace');
 
-program.addCommand(buildWorkspaceCommand({
+const cmd = buildWorkspaceCommand({
   name: 'remove',
   description: 'removes a workspace',
   aliases: ['rm', 'delete', 'del'],
@@ -14,4 +13,5 @@ program.addCommand(buildWorkspaceCommand({
     Workspace.remove(ws.name);
     console.log(`Successfully removed the ${chalk.cyanBright(ws.name)} workspace.`);
   }
-}));
+});
+module.exports = cmd;

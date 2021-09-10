@@ -1,8 +1,7 @@
 const { buildWorkspaceCommand } = require('./utils');
-const { program } = require('commander');
 const chalk = require('chalk');
 
-program.addCommand(buildWorkspaceCommand({
+const cmd = buildWorkspaceCommand({
   name: 'clock',
   description: 'performs a clock operation on a workspace',
   aliases: ['clk'],
@@ -14,4 +13,5 @@ program.addCommand(buildWorkspaceCommand({
     ws.save();
     console.log(`Succesfully clocked ${ws.clocks.length % 2 == 1 ? 'into' : 'out of'} the ${chalk.cyanBright(ws.name)} workspace.`);
   }
-}));
+});
+module.exports = cmd;
