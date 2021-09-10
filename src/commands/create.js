@@ -1,17 +1,23 @@
-const { program, Command } = require('commander');
+const { buildWorkspaceCommand } = require('./utils');
+const { program } = require('commander');
 const chalk = require('chalk');
 const { Workspace } = require('../core/workspace');
 
-program.addCommand(new Command('create')
-  .aliases(['cr', 'make', 'mk'])
-  .description('creates a workspace')
-  .action(function() {
-    const ws = program.opts().ws;
-    if (Workspace.exists(ws)) {
-      console.log(chalk.yellowBright('Workspace already exists.'));
-    }
-    else {
+program.addCommand(buildWorkspaceCommand({
+  name: 'create',
+  description: 'creates a workspace',
+  aliases: ['cr', 'make', 'mk'],
+  mustExist: false,
+  confirm(ws) {
+    return typeof(ws) === 'string' ? `Are you sure you want to create a ${chalk.cyanBright(ws)} workspace?` : false;
+  },
+  action(ws) {
+    if (typeof(ws) === 'string') {
       new Workspace(ws).save();
       console.log(`Successfully created the ${chalk.cyanBright(ws)} workspace.`);
     }
-  }));
+    else {
+      console.log(chalk.redBright('Workspace already exists.'));
+    }
+  }
+}));

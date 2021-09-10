@@ -1,55 +1,52 @@
-const { program, Command } = require('commander');
+const { buildWorkspaceCommand } = require('./utils');
+const { program } = require('commander');
 const chalk = require('chalk');
 const format = require('date-format');
-const { Workspace, MILLIS_TO_HOURS } = require('../core/workspace');
+const { MILLIS_TO_HOURS } = require('../core/workspace');
 
-program.addCommand(new Command('view')
-  .aliases(['v'])
-  .description('views a workspace')
-  .action(function() {
-    const ws = Workspace.load(program.opts().ws);
-    if (ws) {
-      let cycles = [];
+program.addCommand(buildWorkspaceCommand({
+  name: 'view',
+  description: 'views a workspace',
+  aliases: ['v'],
+  action(ws) {
+    let cycles = [];
 
-      /**
-       * @type {Date}
-       */
-      let clkin = undefined;
-      ws.clocks.forEach(clk => {
-        if (clkin) {
-          // Add cycle
-          cycles.push(renderCycle(clkin, clk));
-          clkin = undefined;
-        }
-        else clkin = clk;
-      });
-      // Add cycle
+    /**
+     * @type {Date}
+     */
+    let clkin = undefined;
+    ws.clocks.forEach(clk => {
       if (clkin) {
-        cycles.push(renderCycle(clkin));
+        // Add cycle
+        cycles.push(renderRow(clkin, clk));
+        clkin = undefined;
       }
+      else clkin = clk;
+    });
+    // Add cycle
+    if (clkin) {
+      cycles.push(renderRow(clkin));
+    }
 
-      console.log('\n---------------------------------------');
-      console.log(`| ${chalk.bold('name'.padStart(11))} | ${chalk.bold(ws.name.padEnd(21))} |`);
-      console.log(`| ${chalk.bold('time'.padStart(11))} | ${chalk.cyanBright(`${ws.time.toFixed(2)} hours`.padEnd(21))} |`);
-      console.log('| ----------------------------------- |');
-      console.log(`|      ${chalk.bold('in')}     |     ${chalk.bold('out')}     |  ${chalk.bold('hours')}  |`);
-      console.log('| ----------- | ----------- | ------- |');
-      cycles.reverse().forEach(cyc => {
-        console.log(cyc);
-      });
-      console.log('---------------------------------------\n');
-    }
-    else {
-      console.log(chalk.yellowBright('Workspace does not exist.'));
-    }
-  }));
+    console.log('\n---------------------------------------');
+    console.log(`| ${chalk.bold('name'.padStart(11))} | ${chalk.bold(ws.name.padEnd(21))} |`);
+    console.log(`| ${chalk.bold('time'.padStart(11))} | ${chalk.cyanBright(`${ws.time.toFixed(2)} hours`.padEnd(21))} |`);
+    console.log('| ----------------------------------- |');
+    console.log(`|      ${chalk.bold('in')}     |     ${chalk.bold('out')}     |  ${chalk.bold('hours')}  |`);
+    console.log('| ----------- | ----------- | ------- |');
+    cycles.reverse().forEach(cyc => {
+      console.log(cyc);
+    });
+    console.log('---------------------------------------\n');
+  }
+}));
 
 /**
  * @param {Date} clkin 
  * @param {Date} clkout 
  * @returns {string}
  */
-function renderCycle(clkin, clkout) {
+function renderRow(clkin, clkout) {
   let render = `${chalk.greenBright(format('MM/dd hh:mm', clkin))} | `;
   if (clkout) {
     render += `${chalk.greenBright(format('MM/dd hh:mm', clkout))}`;
