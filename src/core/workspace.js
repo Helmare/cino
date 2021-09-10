@@ -78,6 +78,13 @@ class Workspace {
     this.clocks.push(new Date());
   }
   /**
+   * Removes a clock at the specified index.
+   * @param {number} index 
+   */
+  unclock(index) {
+    this.clocks.splice(this.clocks.length - index - 1, 1);
+  }
+  /**
    * Saves the workspace to a file as JSON.
    */
   save() {
