@@ -31,7 +31,7 @@ module.exports = {
         }
 
         // Perform confirmation if required.
-        if (confirm && confirm(ws) && !args.yes) {
+        if (!args.yes && confirm && confirm(ws, args)) {
           prompt({
             type: 'confirm',
             name: 'conf',

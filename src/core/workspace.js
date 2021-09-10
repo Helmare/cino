@@ -73,9 +73,10 @@ class Workspace {
 
   /**
    * Performs a clock on this workspace.
+   * @param {Date} time
    */
-  clock() {
-    this.clocks.push(new Date());
+  clock(time) {
+    this.clocks.push(time || new Date());
   }
   /**
    * Removes a clock at the specified index.
