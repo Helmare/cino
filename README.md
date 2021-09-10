@@ -11,68 +11,20 @@ npm i -g cino
 Workspace is the way cino separates time spent on different activities. For example, you might have a workspace for each project you're working on to distinguish where time was spent.
 
 ## Usage
-### Create Workspace
+Before you start tracking your time, you'll have to create a workspace.
 ```
-Usage: cino create|cr [options]
-
-creates new workspace
-
-Options:
-  -w, --ws <name>  the workspace to be used
-  -y, --yes        skips the confirmation prompt
-  -h, --help       display help for command
-
+cino create -yw <name>
 ```
-
-### Clock In\Out
+Once your workspace is created, you can clock into it. You clock out of it the same way.
 ```
-Usage: cino clock|clk [options]
-
-clocks in/out of a workspace
-
-Options:
-  -w, --ws <name>    the workspace to be used
-  -y, --yes          skips the confirmation prompt
-  -t, --time <time>  time of the clock
-  -h, --help         display help for command
-
+cino clock -yw <name>
+```
+View your timesheet afterward to verify everything is working properly
+```
+cino view -w <name>
 ```
 
-### View Timesheet
-```
-Usage: cino view|v [options]
+If you require more help, just use the `--help` option at the root or after a command.
 
-displays a workspace
-
-Options:
-  -w, --ws <name>  the workspace to be used
-  -h, --help       display help for command
-
-```
-
-### Remove Clock Instance
-```
-Usage: cino unclock|unclk [options]
-
-removes clock from a workspace
-
-Options:
-  -w, --ws <name>  the workspace to be used
-  -y, --yes        skips the confirmation prompt
-  -i, --index      index of the clock (default: "0")
-  -h, --help       display help for command
-
-```
-
-### Remove Workspace
-```
-Usage: cino remove|rm [options]
-
-removes workspace
-
-Options:
-  -w, --ws <name>  the workspace to be used
-  -y, --yes        skips the confirmation prompt
-  -h, --help       display help for command
-
-```
+### All Commands
+`create`, `clock`, `view`, `unclock`, `remove`
