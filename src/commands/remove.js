@@ -4,7 +4,7 @@ const { Workspace } = require('../core/workspace');
 
 const cmd = buildWorkspaceCommand({
   name: 'remove',
-  description: 'removes a workspace',
+  description: 'removes workspace',
   aliases: ['rm', 'delete', 'del'],
   confirm(ws) {
     return `Are you sure you want to remove the ${chalk.cyanBright(ws.name)} workspace?`;

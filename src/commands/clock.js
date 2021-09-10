@@ -3,7 +3,7 @@ const chalk = require('chalk');
 
 const cmd = buildWorkspaceCommand({
   name: 'clock',
-  description: 'performs a clock operation on a workspace',
+  description: 'clocks in/out of a workspace',
   aliases: ['clk'],
   confirm(ws) {
     return `Are you sure you want to clock ${ws.clocks.length % 2 == 0 ? 'into' : 'out of'} ${chalk.cyanBright(ws.name)}?`;

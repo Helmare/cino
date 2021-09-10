@@ -4,7 +4,7 @@ const { Workspace } = require('../core/workspace');
 
 const cmd = buildWorkspaceCommand({
   name: 'create',
-  description: 'creates a workspace',
+  description: 'creates new workspace',
   aliases: ['cr', 'make', 'mk'],
   mustExist: false,
   confirm(ws) {

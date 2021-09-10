@@ -5,7 +5,7 @@ const { MILLIS_TO_HOURS } = require('../core/workspace');
 
 const cmd = buildWorkspaceCommand({
   name: 'view',
-  description: 'views a workspace',
+  description: 'displays a workspace',
   aliases: ['v'],
   action(ws) {
     let cycles = [];
@@ -15,6 +15,7 @@ const cmd = buildWorkspaceCommand({
      */
     let clkin = undefined;
     ws.clocks.forEach(clk => {
+      console.log(clk);
       if (clkin) {
         // Add cycle
         cycles.push(renderRow(clkin, clk));
