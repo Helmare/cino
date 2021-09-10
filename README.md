@@ -24,7 +24,7 @@ View your timesheet afterward to verify everything is working properly
 cino view -w <name>
 ```
 
-If you require more help, just use the `--help` option at the root or after a command.
+If you require more help, use the `--help` option at the root or after a command.
 
 ### All Commands
-`create`, `clock`, `view`, `unclock`, `remove`
+`clock`, `create`, `dir`, `help`, `remove`, `unclock`, `view`
