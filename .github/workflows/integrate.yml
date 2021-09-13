@@ -21,8 +21,5 @@ jobs:
     - name: Restore Dependencies
       run: npm ci
 
-    - name: Build Minified Verison
-      run: npm run build
-
     - name: Run Tests
       run: npm test
