@@ -2,7 +2,7 @@
 - [X] Add unit test for the current code base
   - [X] Install `jest` to the project.
   - [X] Create tests for all `Workspace` methods.
-- [X] Implemented CI/CD in Github Actions
+- [ ] Implemented CI/CD in Github Actions
   - [X] Create a testing action for every push to any branch.
   - [ ] Create a deploy action to publish when a tag is created.
 - [ ] Improve `view` command
