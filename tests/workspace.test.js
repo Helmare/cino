@@ -1,4 +1,4 @@
-const { Workspace, MILLIS_TO_HOURS } = require('../src/core/workspace');
+const { Workspace, MILLIS_TO_HOURS } = require('../src/core');
 jest.spyOn(Date, 'now').mockReturnValue(54321);
 
 describe('create workspace', () => {

@@ -1,7 +1,6 @@
 const { buildWorkspaceCommand } = require('./utils');
 const chalk = require('chalk');
 const format = require('date-format');
-const { MILLIS_TO_HOURS } = require('../core/workspace');
 
 const cmd = buildWorkspaceCommand({
   name: 'view',
@@ -9,23 +8,16 @@ const cmd = buildWorkspaceCommand({
   aliases: ['v'],
   action(ws) {
     let cycles = [];
-
-    /**
-     * @type {Date}
-     */
-    let clkin = undefined;
-    ws.clocks.forEach(clk => {
-      if (clkin) {
-        // Add cycle
-        cycles.push(renderRow(clkin, clk));
-        clkin = undefined;
+    ws.collapse().forEach(cyc => {
+      let render = `${chalk.greenBright(format('MM/dd hh:mm', cyc.in))} | `;
+      if (cyc.out) {
+        render += `${chalk.greenBright(format('MM/dd hh:mm', cyc.out))}`;
       }
-      else clkin = clk;
+      else {
+        render += '     -     ';
+      }
+      cycles.push(`| ${render} | ${chalk.cyanBright(cyc.duration.toFixed(2).padStart(7))} |`);
     });
-    // Add cycle
-    if (clkin) {
-      cycles.push(renderRow(clkin));
-    }
 
     console.log('\n---------------------------------------');
     console.log(`| ${chalk.bold('name'.padStart(11))} | ${chalk.bold(ws.name.padEnd(21))} |`);
@@ -39,21 +31,5 @@ const cmd = buildWorkspaceCommand({
     console.log('---------------------------------------\n');
   }
 });
-/**
- * @param {Date} clkin 
- * @param {Date} clkout 
- * @returns {string}
- */
-function renderRow(clkin, clkout) {
-  let render = `${chalk.greenBright(format('MM/dd hh:mm', clkin))} | `;
-  if (clkout) {
-    render += `${chalk.greenBright(format('MM/dd hh:mm', clkout))}`;
-  }
-  else {
-    render += '     -     ';
-  }
-  const cycleTime = MILLIS_TO_HOURS * (clkout ? clkout.getTime() - clkin.getTime() : Date.now() - clkin.getTime());
-  return `| ${render} | ${chalk.cyanBright(cycleTime.toFixed(2).padStart(7))} |`;
-}
 
 module.exports = cmd;

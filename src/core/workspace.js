@@ -1,9 +1,9 @@
 const fs = require('fs');
 const path = require('path');
 const jsonf = require('jsonfile');
+const { Cycle } = require('./cycle');
+const { WORKSPACE_DIR, MILLIS_TO_HOURS } = require('./utils');
 
-const WORKSPACE_DIR = path.join(require('os').homedir(), '.cino');
-const MILLIS_TO_HOURS = 1 / 3600000;
 class Workspace {
   /**
    * 
@@ -75,6 +75,29 @@ class Workspace {
   }
 
   /**
+   * Collapses the clocks into cycles.
+   * @returns {Cycle[]}
+   */
+  collapse() {
+    let cycles = [];
+
+    let clkin = undefined;
+    this.clocks.forEach(clk => {
+      if (clkin) {
+        // Add cycle
+        cycles.push(new Cycle(clkin, clk))
+        clkin = undefined;
+      }
+      else clkin = clk;
+    });
+    if (clkin) {
+      cycles.push(new Cycle(clkin));
+    }
+
+    return cycles;
+  }
+
+  /**
    * Performs a clock on this workspace.
    * @param {Date | undefined} time
    */
@@ -136,18 +159,7 @@ class Workspace {
       return new Workspace(jsonf.readFileSync(Workspace.path(name)));
     }
   }
-  /**
-   * Loads a workspace or creates a new one if it doesn't exist.
-   * @param {string} name 
-   */
-  static loadOrNew(name) {
-    const ws = Workspace.load(name);
-    if (ws) return ws;
-    else return new Workspace(name);
-  }
 }
 module.exports = {
-  MILLIS_TO_HOURS,
-  WORKSPACE_DIR,
   Workspace
 };

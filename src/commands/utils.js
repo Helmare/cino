@@ -3,10 +3,24 @@ const chalk = require('chalk');
 const { prompt } = require('enquirer');
 const { Workspace } = require('../core/workspace');
 
+/**
+ * @callback workspaceCommandCallback
+ * @param {Workspace} ws
+ * @param {object} args
+ */
+/**
+ * @typedef {object} BuildWorkspaceCommandOptions
+ * @property {string} name
+ * @property {string} description
+ * @property {string[]} aliases
+ * @property {workspaceCommandCallback} action
+ * @property {boolean} mustExist
+ * @property {workspaceCommandCallback} confirm
+ */
 module.exports = {
   /**
    * 
-   * @param {object} options 
+   * @param {BuildWorkspaceCommandOptions} options 
    */
   buildWorkspaceCommand({name, description, aliases=[], action, mustExist = true, confirm = false} = {}) {
     if (!name || !action) {
