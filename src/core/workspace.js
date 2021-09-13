@@ -69,20 +69,29 @@ class Workspace {
     if (this.clocks.length % 2 == 1) {
       return (Date.now() - this.clocks[this.clocks.length - 1]) * MILLIS_TO_HOURS;
     }
+    else {
+      return 0;
+    }
   }
 
   /**
    * Performs a clock on this workspace.
-   * @param {Date} time
+   * @param {Date | undefined} time
    */
-  clock(time) {
-    this.clocks.push(time || new Date());
+  clock(time = new Date(Date.now())) {
+    if (typeof(time) === 'string' || typeof(time) === 'number') {
+      time = new Date(time);
+    }
+    if (time instanceof Date && !Number.isNaN(time.getTime())) {
+      this.clocks.push(time);
+    }
   }
   /**
    * Removes a clock at the specified index.
    * @param {number} index 
    */
-  unclock(index) {
+  unclock(index = 0) {
+    if (typeof(index) !== 'number') index = 0;
     this.clocks.splice(this.clocks.length - index - 1, 1);
   }
   /**
