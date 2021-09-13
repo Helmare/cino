@@ -1,9 +1,9 @@
 # TODO (v0.2.0)
-- [ ] Add unit test for the current code base
-  - [ ] Install `jest` to the project.
-  - [ ] Create tests for all `Workspace` methods.
-- [ ] Implemented CI/CD in Github Actions
-  - [ ] Create a testing action for every push to any branch.
+- [X] Add unit test for the current code base
+  - [X] Install `jest` to the project.
+  - [X] Create tests for all `Workspace` methods.
+- [X] Implemented CI/CD in Github Actions
+  - [X] Create a testing action for every push to any branch.
   - [ ] Create a deploy action to publish when a tag is created.
 - [ ] Improve `view` command
   - [ ] Add `-s, --start` option (default: start of week)
