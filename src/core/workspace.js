@@ -23,9 +23,8 @@ class Workspace {
       if (data.name) this.name = data.name;
       if (data.clocks) {
         data.clocks.forEach(e => {
-          this.clocks.push(new Date(e));
+          this.clock(e);
         });
-        this.clocks.sort((a, b) => a.getTime() - b.getTime());
       }
     }
     else if (typeof(data) === 'string') {
@@ -99,7 +98,7 @@ class Workspace {
 
   /**
    * Performs a clock on this workspace.
-   * @param {Date | undefined} time
+   * @param {Date | string | number} [time]
    */
   clock(time = new Date(Date.now())) {
     if (typeof(time) === 'string' || typeof(time) === 'number') {
@@ -107,6 +106,7 @@ class Workspace {
     }
     if (time instanceof Date && !Number.isNaN(time.getTime())) {
       this.clocks.push(time);
+      this.clocks.sort((a, b) => a.getTime() - b.getTime());
     }
   }
   /**
