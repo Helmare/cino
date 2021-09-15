@@ -15,13 +15,19 @@ describe('duration', () => {
 });
 describe('includes', () => {
   const cases = [
-    [new Date(100), new Date(300), new Date(200), true],
-    [new Date(100), new Date(300), new Date(50), false],
-    [new Date(100), new Date(300), new Date(400), false],
-    [new Date(100), undefined, new Date(250), true],
-    [new Date(100), undefined, new Date(60000), false]
+    [new Date(100), new Date(300), new Date(200), undefined, true],
+    [new Date(100), new Date(300), new Date(50), undefined, false],
+    [new Date(100), new Date(300), new Date(400), undefined, false],
+    [new Date(100), undefined, new Date(250), undefined, true],
+    [new Date(100), undefined, new Date(60000), undefined, false],
+    [new Date(100), new Date(300), new Date(150), new Date(350), true],
+    [new Date(100), new Date(300), new Date(150), new Date(250), true],
+    [new Date(100), new Date(300), new Date(50), new Date(250), true],
+    [new Date(100), new Date(300), new Date(50), new Date(350), true],
+    [new Date(100), new Date(300), new Date(25), new Date(50), false],
+    [new Date(100), new Date(300), new Date(350), new Date(375), false]
   ];
-  test.each(cases)('Cycle (%p, %p) contains %p? %p', (_in, out, time, result) => {
-    expect(new Cycle(_in, out).includes(time)).toEqual(result);
+  test.each(cases)('Cycle (%p, %p) includes %p to %p? %p', (_in, out, start, end, result) => {
+    expect(new Cycle(_in, out).includes(start, end)).toEqual(result);
   });
 });

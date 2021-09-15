@@ -1,8 +1,8 @@
 const { MILLIS_TO_HOURS } = require('./utils');
 class Cycle {
   /**
-   * @param {Date} start 
-   * @param {Date} end 
+   * @param {Date} _in 
+   * @param {Date} [out] 
    */
   constructor(_in, out) {
     this.in = _in;
@@ -19,12 +19,20 @@ class Cycle {
 
   /**
    * Determains if the date provided is between in and out times.
-   * @param {Date} time 
+   * @param {Date} start 
+   * @param {Date} [end]
    */
-  includes(time) {
-    const _in = this.in.getTime();
-    const out = this.out ? this.out.getTime() : Date.now();
-    return time.getTime() >= _in && time.getTime() <= out;
+  includes(start, end) {
+    if (end) {
+      const _in = this.in.getTime();
+      const out = this.out ? this.out.getTime() : Date.now();
+      return (start.getTime() >= _in || end.getTime() >= _in) && (start.getTime() <= out || end.getTime() <= out);
+    }
+    else {
+      const _in = this.in.getTime();
+      const out = this.out ? this.out.getTime() : Date.now();
+      return start.getTime() >= _in && start.getTime() <= out;
+    }
   }
 }
 module.exports = {
