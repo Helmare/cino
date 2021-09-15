@@ -2,7 +2,7 @@ const fs = require('fs');
 const path = require('path');
 const jsonf = require('jsonfile');
 const { Cycle } = require('./cycle');
-const { WORKSPACE_DIR, MILLIS_TO_HOURS } = require('./utils');
+const { WORKSPACE_DIR, MILLIS_TO_HOURS, toDate } = require('./utils');
 
 class Workspace {
   /**
@@ -98,13 +98,10 @@ class Workspace {
 
   /**
    * Performs a clock on this workspace.
-   * @param {Date | string | number} [time]
+   * @param {DateLike} [time]
    */
   clock(time = new Date(Date.now())) {
-    if (typeof(time) === 'string' || typeof(time) === 'number') {
-      time = new Date(time);
-    }
-    if (time instanceof Date && !Number.isNaN(time.getTime())) {
+    if (time = toDate(time)) {
       this.clocks.push(time);
       this.clocks.sort((a, b) => a.getTime() - b.getTime());
     }
