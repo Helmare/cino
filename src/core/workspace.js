@@ -78,7 +78,7 @@ class Workspace {
    * Collapses the clocks into cycles.
    * @returns {Cycle[]}
    */
-  collapse() {
+  get cycles() {
     let cycles = [];
 
     let clkin = undefined;
