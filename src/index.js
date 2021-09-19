@@ -1,5 +1,5 @@
 #! /usr/bin/env node
-const { WORKSPACE_DIR } = require('./core/workspace');
+const { WORKSPACE_DIR } = require('./core');
 const { program } = require('commander');
 
 // Setup
