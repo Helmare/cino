@@ -1,4 +1,5 @@
 const { buildWorkspaceCommand } = require('./utils');
+const { toDate }  = require('../core/utils');
 const chalk = require('chalk');
 const format = require('date-format');
 
@@ -6,14 +7,20 @@ const cmd = buildWorkspaceCommand({
   name: 'view',
   description: 'displays a workspace',
   aliases: ['v'],
-  action(ws) {
+  action(ws, args) {
     // Setup
-    let start = new Date();
+    let start = args.start;
+    if (!(start = toDate(start))) {
+      start = new Date();
+      start.setDate(start.getDate() - start.getDay());
+    }
     start.setHours(0, 0, 0, 0);
-    start.setDate(start.getDate() - start.getDay());
 
-    let end = new Date(start.getTime());
-    end.setDate(end.getDate() + 6);
+    let end = args.end;
+    if (!(end = toDate(end))) {
+      end = new Date();
+      end.setDate(end.getDate() + (6 - end.getDay()));
+    }
     end.setHours(23, 59, 59);
 
     const view = ws.view(start, end);
@@ -45,6 +52,8 @@ const cmd = buildWorkspaceCommand({
     // Footer
     console.log('-----------------------------------------\n');
   }
-});
+})
+.option('-s, --start <date>', 'start of time range', 'start of week')
+.option('-e, --end <date>', 'end of time range', 'end of week');
 
 module.exports = cmd;
