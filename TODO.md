@@ -5,10 +5,10 @@
 - [ ] Implemented CI/CD in Github Actions
   - [X] Create a testing action for every push to any branch.
   - [ ] Create a deploy action to publish when a tag is created.
-- [ ] Improve `view` command
-  - [ ] Add `-s, --start` option (default: start of week)
-  - [ ] Add `-e, --end` option (default: now)
-  - [ ] Show total time and time between `--start` and `--end`
+- [X] Improve `view` command
+  - [X] Add `-s, --start` option (default: start of week)
+  - [X] Add `-e, --end` option (default: now)
+  - [X] Show total time and time between `--start` and `--end`
 - [ ] Add `status` command
   - [ ] Displays cycles and hours on a given day.
   - [ ] The day is set by `-d, --day` (default: today).
