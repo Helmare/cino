@@ -97,6 +97,37 @@ class Workspace {
   }
 
   /**
+   * Gets an overview of the workspace between two dates.
+   * @param {Date} start 
+   * @param {Date} end 
+   */
+  view(start, end) {
+    if ((start = toDate(start)) && (end = toDate(end))) {
+      let cycles = [];
+      let time = 0;
+      this.cycles.forEach(cyc => {
+        if (cyc.includes(start, end)) {
+          cycles.unshift(cyc);
+
+          time += cyc.duration;
+          if (cyc.includes(start)) {
+            time -= (start.getTime() - cyc.in.getTime()) * MILLIS_TO_HOURS;
+          }
+          if (cyc.includes(end)) {
+            const out = cyc.out ? cyc.out.getTime() : Date.now();
+            time -= (out - end.getTime()) * MILLIS_TO_HOURS;
+          }
+        }
+      });
+
+      // Build view
+      return {
+        start, end, time, cycles
+      }
+    }
+  }
+
+  /**
    * Performs a clock on this workspace.
    * @param {DateLike} [time]
    */
