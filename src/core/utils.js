@@ -11,6 +11,9 @@ module.exports = {
    * @returns {Date|undefined}
    */
   toDate(val) {
+    if (typeof(val) === 'string' && val.toLowerCase() == 'now') {
+      return new Date(Date.now());
+    }
     if (typeof(val) === 'string' || typeof(val) === 'number') {
       val = new Date(val);
     }
