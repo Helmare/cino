@@ -179,12 +179,12 @@ class Workspace {
   }
   /**
    * Loads a workspace.
-   * @param {string} name 
+   * @param {string | fs.PathLike} ws
    * @return {Workspace}
    */
-  static load(name) {
-    if (Workspace.exists(name)) {
-      return new Workspace(jsonf.readFileSync(Workspace.path(name)));
+  static load(ws) {
+    if (fs.existsSync(ws) || fs.existsSync(ws = Workspace.path(ws))) {
+      return new Workspace(jsonf.readFileSync(ws));
     }
   }
 }
