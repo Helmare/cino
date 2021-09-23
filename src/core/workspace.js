@@ -122,7 +122,7 @@ class Workspace {
 
       // Build view
       return {
-        start, end, time, cycles
+        workspace: this, start, end, time, cycles
       }
     }
   }

@@ -14,6 +14,7 @@ program.command('dir').action(() => {
 program.addCommand(require('./commands/create'));
 program.addCommand(require('./commands/clock'));
 program.addCommand(require('./commands/view'));
+program.addCommand(require('./commands/status'));
 program.addCommand(require('./commands/unclock'));
 program.addCommand(require('./commands/remove'));
 
